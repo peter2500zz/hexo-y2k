@@ -8,14 +8,14 @@
       "binding": "DB",
       "database_name": "y2k",
       // npx wrangler d1 create y2k 输出的 database_id
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "2f58afd2-feac-42c7-b962-03b66aa054cf",
       "migrations_dir": "migrations"
     }
   ],
   // 其余配置项与 .env.example 相同；ADMIN_TOKEN、HASH_SALT、AKISMET_KEY、CAPTCHA_SECRET 用 npx wrangler secret put 设置
   "vars": {
-    "CORS_ORIGINS": "https://blog.example.com",
-    "SITE_URL": "https://blog.example.com",
+    "CORS_ORIGINS": "*",
+    "SITE_URL": "https://mygo.plus",
     "TIMEZONE": "Asia/Shanghai",
     "MODERATION": "auto"
   },
