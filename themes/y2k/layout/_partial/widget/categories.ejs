@@ -1,0 +1,7 @@
+<% if (site.categories.length) { %>
+<div class="box w-categories"><div class="boxt"><a class="more" href="<%- url_for(config.category_dir + '/') %>">更多&gt;&gt;</a>◆ 栏目分类</div><div class="boxb">
+  <% site.categories.sort('name').each(function (c) { if (c.parent) return; %>
+  <div>· <a href="<%- url_for(c.path) %>"><%= c.name %></a> <span class="muted">(<%= c.length %>)</span></div>
+  <% }) %>
+</div></div>
+<% } %>

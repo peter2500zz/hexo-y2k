@@ -1,0 +1,4 @@
+<% var tag = site.tags.findOne({ name: page.tag }); %>
+<%- partial('_partial/col-open', { cols: 2 }) %>
+<%- partial('_partial/post-table', { heading: '标签：' + page.tag, total: tag ? tag.length : null, crumb: '标签：' + page.tag }) %>
+<%- partial('_partial/col-close', { cols: 2 }) %>

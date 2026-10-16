@@ -1,0 +1,10 @@
+<% var ct = theme.counter || {}; var viaBackend = y2k_provider('counter') === 'backend'; %>
+<div class="box w-counter"><div class="boxt">◆ 本站统计</div><div class="boxb" align="center">
+  您是本站第<br>
+  <span class="counter <%= ct.style || 'led' %>" data-y2k-counter><% for (var i = 0; i < (parseInt(ct.digits, 10) || 6); i++) { %><b>0</b><% } %></span><br>
+  位访客<br>
+  <% if (viaBackend && ct.show_today !== false) { %><span data-y2k-today hidden>今日访问：<span class="hi2"></span></span><br data-y2k-today hidden><% } %>
+  <% if (viaBackend && ct.show_online !== false) { %><span data-y2k-online hidden>当前在线：<span class="hi1"></span> 人</span><br data-y2k-online hidden><% } %>
+  <% if (ct.since) { %><span class="muted">本站开通于 <%= ct.since %></span><br><% } %>
+  <span class="muted">文章 <%= site.posts.length %> 篇 · 栏目 <%= site.categories.length %> 个</span>
+</div></div>

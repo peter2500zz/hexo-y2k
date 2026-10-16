@@ -1,0 +1,12 @@
+<% if (page.total > 1) {
+  var cur = page.current, n = page.total;
+  var from = Math.max(1, cur - 4), to = Math.min(n, from + 9);
+  from = Math.max(1, to - 9);
+%>
+<div class="pager" align="center">
+  <% if (total != null) { %>共 <b><%= total %></b> 篇　<% } %>第 <b class="hi1"><%= cur %></b>/<b><%= n %></b> 页　
+  <% if (cur > 1) { %><a href="<%- y2k_page_url(1) %>">[首页]</a> <a href="<%- y2k_page_url(cur - 1) %>">[上一页]</a><% } else { %><span class="muted">[首页] [上一页]</span><% } %>
+  <% for (var i = from; i <= to; i++) { %><% if (i === cur) { %> <b class="pager-cur"><%= i %></b><% } else { %> <a href="<%- y2k_page_url(i) %>"><%= i %></a><% } %><% } %>
+  <% if (cur < n) { %><a href="<%- y2k_page_url(cur + 1) %>">[下一页]</a> <a href="<%- y2k_page_url(n) %>">[尾页]</a><% } else { %><span class="muted">[下一页] [尾页]</span><% } %>
+</div>
+<% } %>

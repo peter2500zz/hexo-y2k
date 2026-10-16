@@ -1,0 +1,20 @@
+<% var groups = y2k_group_by_month(page.posts.toArray()); %>
+<div class="where">您现在的位置：<a href="<%- url_for('/') %>">首页</a> &gt; <%= crumb %></div>
+<div class="box"><div class="boxt">◆ <%= heading %><% if (total != null) { %>（共 <%= total %> 篇）<% } %></div><div class="boxb">
+  <% if (!groups.length) { %>
+  <div align="center" class="muted">这里还没有文章。</div>
+  <% } else { %>
+  <table class="thin list" width="100%" cellspacing="1" cellpadding="3">
+    <tr class="th"><th width="78">日期</th><th>标题</th><th width="90">栏目</th></tr>
+    <% groups.forEach(function (g) { %>
+    <tr class="grp"><td colspan="3">■ <a href="<%- url_for(config.archive_dir + '/' + g.year + '/' + g.month + '/') %>"><%= g.label %></a>（<%= g.posts.length %> 篇）</td></tr>
+      <% g.posts.forEach(function (p) { var cs = y2k_categories(p); %>
+    <tr class="hl"><td align="center" class="en"><%= p.date.format('YYYY-MM-DD') %></td>
+        <td>· <a href="<%- url_for(p.path) %>"><%= p.title || '（无题）' %></a><% if (y2k_is_new(p)) { %> <span class="new">NEW!</span><% } %></td>
+        <td align="center"><% cs.forEach(function (c) { %><a href="<%- url_for(c.path) %>">[<%= c.name %>]</a><% }) %></td></tr>
+      <% }) %>
+    <% }) %>
+  </table>
+  <% } %>
+</div></div>
+<%- partial('_partial/pagination', { total: total }) %>

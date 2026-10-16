@@ -1,0 +1,8 @@
+<% var sb = theme.sidebar || {}; %>
+  </td>
+<% if (cols === 3) { %>
+  <td class="gap" width="10"></td>
+  <td class="col side" width="180" valign="top"><%- partial('_partial/sidebar', { widgets: sb.right || [] }) %></td>
+<% } %>
+</tr>
+</table>

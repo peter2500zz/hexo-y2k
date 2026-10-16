@@ -1,0 +1,5 @@
+<% var cm = theme.comments || {}; %>
+<%- partial('_partial/col-open', { cols: 2 }) %>
+<%- partial('_partial/article', { post: page, isPage: false }) %>
+<% if (cm.on_posts !== false && page.comments !== false) { %><%- partial('_partial/comments', { key: y2k_key(page), title: '读者留言' }) %><% } %>
+<%- partial('_partial/col-close', { cols: 2 }) %>

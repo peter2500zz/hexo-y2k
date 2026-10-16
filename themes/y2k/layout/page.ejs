@@ -1,0 +1,22 @@
+<%
+// 普通页面；front-matter 里写 type 可变成特殊页面：
+//   type: categories  栏目总览    type: tags  标签总览
+//   type: links       友情链接    type: guestbook  留言本
+//   type: 404         找不到网页（还需要 permalink: /404.html）
+var type = String(page.type || '');  // YAML 会把 404 读成数字
+var cm = theme.comments || {};
+%>
+<%- partial('_partial/col-open', { cols: 2 }) %>
+<% if (type === 'categories') { %>
+  <%- partial('_partial/page-categories') %>
+<% } else if (type === 'tags') { %>
+  <%- partial('_partial/page-tags') %>
+<% } else if (type === '404') { %>
+  <%- partial('_partial/page-404') %>
+<% } else { %>
+  <%- partial('_partial/article', { post: page, isPage: true }) %>
+  <% if (type === 'links') { %><%- partial('_partial/page-links') %><% } %>
+  <% if (type === 'guestbook') { %><%- partial('_partial/comments', { key: 'guestbook', title: page.title || '留言本' }) %>
+  <% } else if (cm.on_pages && page.comments !== false && !type) { %><%- partial('_partial/comments', { key: y2k_key(page), title: '读者留言' }) %><% } %>
+<% } %>
+<%- partial('_partial/col-close', { cols: 2 }) %>

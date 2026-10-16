@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!-- 当年这里会写 <meta http-equiv="Content-Type" content="text/html; charset=gb2312">，今天用 UTF-8 防乱码 -->
+<!-- hexo-theme-y2k · 千禧年中文个人主页风格 · 本页用表格排版，最佳浏览效果 800×600 -->
+<html lang="<%= config.language || 'zh-CN' %>" class="scheme-<%= theme.scheme || 'stars' %><%= theme.effects && theme.effects.scrollbar === false ? '' : ' y2k-scrollbar' %>">
+<head>
+<%- partial('_partial/head') %>
+</head>
+<body topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+<a id="top" name="top"></a>
+<%- partial('_partial/header') %>
+<%- body %>
+<%- partial('_partial/footer') %>
+<%- partial('_partial/scripts') %>
+</body>
+</html>

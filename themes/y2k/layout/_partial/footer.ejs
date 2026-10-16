@@ -1,0 +1,24 @@
+<%
+var W = parseInt((theme.layout && theme.layout.width) || 760, 10);
+var ft = theme.footer || {};
+var pf = theme.profile || {};
+var latest = y2k_latest_post();
+var updated = is_post() || is_page() ? (page.updated || page.date) : (latest ? latest.date : null);
+var owner = ft.owner || config.author || config.title;
+%>
+<table class="page footer" width="<%= W %>" align="center" cellpadding="0" cellspacing="0" border="0">
+  <tr><td><hr size="1" noshade></td></tr>
+  <tr><td align="center">
+    <% if (ft.links) { var keys = Object.keys(ft.links); %>
+    <div class="footer-links"><% keys.forEach(function (k, i) { %><a href="<%= y2k_href(ft.links[k]) %>"><%= k %></a> | <% }) %><a href="#top">返回顶部</a></div>
+    <% } %>
+    <% if (ft.best_view) { %><div class="muted"><%= ft.best_view %></div><% } %>
+    <% if (ft.updated !== false && updated) { %><div class="muted" id="y2k-updated" data-y="<%= updated.format('YYYY') %>" data-md="<%= updated.format('M月D日') %>">本页最后更新于：<%= updated.format('YYYY年M月D日') %></div><% } %>
+    <% if (pf.nickname || pf.oicq || pf.email) { %>
+    <div>站长：<%= pf.nickname || config.author %><% if (pf.oicq) { %>　OICQ：<span class="hi2"><%= pf.oicq %></span><% } %><% if (pf.email) { %>　E-mail：<a href="mailto:<%= pf.email %>"><%= pf.email %></a><% } %></div>
+    <% } %>
+    <div><span class="en">Copyright &copy; <%= y2k_copyright_years() %> <%= owner %>. All Rights Reserved.</span><% if (ft.statement) { %>　<%= ft.statement %><% } %></div>
+    <% if (ft.icp) { %><div class="muted"><%= ft.icp %></div><% } %>
+    <% if (ft.powered !== false) { %><div class="muted en">本站由 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 驱动 · 主题：千禧 Y2K</div><% } %>
+  </td></tr>
+</table>

@@ -1,0 +1,305 @@
+# ==============================================================
+#  hexo-theme-y2k —— 千禧年（约 2000 年）中文个人主页风格
+#
+#  12px 宋体、760 宽表格排版、跑马灯、LED 计数器、88×31 友情链接、
+#  Win98 按钮、留言本、方波"MIDI"背景音乐……
+#
+#  建议不要直接改这个文件：在站点根目录新建 _config.y2k.yml，
+#  只写想覆盖的项，Hexo 会自动合并。
+# ==============================================================
+
+# 配色方案
+#   stars   星空（深蓝平铺星点 + 黄色链接，默认）
+#   pink    粉色少女（粉格子信纸）
+#   green   清新绿
+#   hacker  黑客黑（黑底绿字）
+#   classic 经典灰（Win98 灰 + 默认蓝链接）
+scheme: stars
+
+# 首页在浏览器标签上的标题，{title} 会换成站点标题
+home_title: '★{title}★ 欢迎光临！'
+
+# 网站图标（如 /favicon.ico），留空不加
+favicon:
+
+# --------------------------------------------------------------
+# 页头
+# --------------------------------------------------------------
+header:
+  # 艺术字大标题，留空用站点 title
+  title:
+  # 标题下的一行英文副标，留空用站点 subtitle
+  subtitle:
+  # 当年的大标题是 GIF 图片（华文彩云 / 华文琥珀做的"艺术字"）。
+  # 这里默认只用访客本机字体：有华文彩云就用，没有就退到粗黑体，仍带渐变、描边和投影。
+  # 想让所有人看到花体字，可以填一个网络字体的 CSS 地址（只用于大标题，异步加载不卡页面），例如：
+  #   wordart_font_css: https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap
+  #   wordart_font_family: ZCOOL KuaiLe
+  # 国内访问 Google Fonts 不稳定，可以换成镜像地址。
+  wordart_font_css:
+  wordart_font_family:
+
+# 顶部工具条：左边日期，右边 设为首页 | 加入收藏 | 自定义链接
+topbar:
+  enable: true
+  links:
+    联系站长: mailto:webmaster@example.net
+
+# 免费空间在页面顶上强制插入的广告条（当年免费主页的标配）
+hostad:
+  enable: true
+  text: 本站空间由 千禧在线 免费提供
+  link_text: 申请 50M 免费主页 >>
+  link: '#'
+
+# 跑马灯。每条一段，可以写 HTML；颜色会按配色方案自动轮换
+marquee:
+  enable: true
+  speed: 4
+  # 在末尾自动追加"本站最近更新：日期 《最新文章标题》"
+  latest: true
+  items:
+    - ★☆★ 热烈欢迎您光临本站！
+    - 如果您喜欢本站，请把它加入收藏夹哦 ^_^ ★☆★
+
+# 导航按钮（Win98 斜面按钮）。名称: 地址
+menu:
+  首　页: /
+  关于我: /about/
+  文章目录: /archives/
+  栏目分类: /categories/
+  留言本: /guestbook/
+  友情链接: /links/
+
+# --------------------------------------------------------------
+# 版面
+# --------------------------------------------------------------
+layout:
+  # 主体固定宽度：760 或 778（800×600 减去滚动条）。窄于 800px 的屏幕会自动把各栏堆叠起来
+  width: 760
+  # 首页栏数：3 = 左 | 中 | 右，2 = 左栏 + 正文
+  index_columns: 3
+
+# 侧栏挂件，按顺序显示。可用的挂件：
+#   profile 站长档案     counter 访客计数器   bgm 背景音乐      search 站内搜索
+#   categories 栏目分类  recent 最近更新      archives 文章归档  tags 文章标签
+#   links 友情链接       webring 网站联盟     poll 小调查       construction 建设中
+#   messages 最新留言（需要后端）
+sidebar:
+  # 首页三栏时的左栏、右栏
+  left: [profile, counter, bgm, search, categories]
+  right: [recent, links, webring, archives, poll]
+  # 文章页、归档页等两栏页面的侧栏
+  two_column: [profile, counter, search, categories, recent, archives, bgm]
+
+# --------------------------------------------------------------
+# 后端（可选）：留言本、计数器、在线人数、小调查共用的 y2k-server（见仓库里的 server/）
+# 填了 url，下面 comments / counter 设为 auto 时会自动改用后端；不填就是纯静态模式
+# --------------------------------------------------------------
+backend:
+  # 例：https://y2k-api.example.com
+  url:
+  # 请求超时（毫秒）
+  timeout: 8000
+
+# 首页第一页顶部的寄语框，可写 HTML。content 留空则不显示
+notice:
+  title: 站长寄语
+  content:
+  sign:
+
+# --------------------------------------------------------------
+# 挂件
+# --------------------------------------------------------------
+profile:
+  nickname: 站长
+  # 头像图片地址，留空用内置的像素小人
+  avatar:
+  # 任意多行资料，名称: 内容
+  items:
+    星座: 水瓶座
+    血型: O 型
+    爱好: 上网、Flash
+  oicq:
+  email:
+
+counter:
+  # auto     ：填了 backend.url 就用 backend，否则用 local
+  # backend  ：y2k-server 统计真实访问量，还能显示今日访问、在线人数、文章阅读次数
+  # local    ：本机计数 = 基数 + 访客在自己电脑上的访问次数，每刷新一次 +1（和当年的计数器一样"虚"）
+  # busuanzi ：不蒜子统计，显示真实的全站访问量，文章页还会显示"本文已被浏览 N 次"
+  provider: auto
+  # 本机计数的基数。用后端时不用它，起始值在后端的 COUNTER_OFFSET 里设
+  base: 12345
+  digits: 6
+  # led 红色数码管 | odo 里程表 | lcd 液晶
+  style: led
+  # "本站开通于 …"，留空不显示
+  since: 2000年1月1日
+  # 用后端时，计数器下面显示"今日访问"和"当前在线"
+  show_today: true
+  show_online: true
+
+bgm:
+  title: 《星之歌》
+  note: 原创 MIDI
+  # 留空：用 Web Audio 方波合成内置的原创旋律，听起来像当年声卡放 MIDI
+  # 填音频地址（mp3/ogg）：播放你自己的文件
+  # 无论哪种，都只在访客点击"播放"之后才出声
+  src:
+
+recent:
+  count: 8
+  # 与最新一篇相差 N 天以内的文章标上闪烁的 NEW!，0 为关闭
+  new_days: 7
+
+archives:
+  # 侧栏最多显示几个月份
+  limit: 12
+
+# 友情链接：侧栏的 88×31 按钮墙，以及 type: links 页面的完整列表
+#   button: split-a 蓝黄双色 | split-b 红白双色 | neon 霓虹 | grad 渐变 | green 绿屏 | blink 闪烁
+#   text  : 按钮上的字；split 类按钮写成两段，如 [千禧, 在线]
+#   image : 有现成的 88×31 小图就填地址，会代替 button/text
+links:
+  - name: Hexo
+    url: https://hexo.io/
+    desc: 本站使用的博客程序
+    button: grad
+    text: HEXO
+# 侧栏"友情链接"挂件：写了 button 或 image 的链接显示成按钮，其余显示成文字链接
+links_widget:
+  buttons: 6
+  texts: 6
+
+# 本站自己的 88×31 按钮，显示在"欢迎交换链接"下面
+site_button:
+  button: split-a
+  text: [我的, 小站]
+  image:
+
+webring:
+  name:
+  prev: '#'
+  random: '#'
+  next: '#'
+
+# 小调查。有后端时票数存在后端，每个 IP 一票；没有后端时只记在访客自己的浏览器里
+poll:
+  # 调查的编号，换了问题想重新计票就改它；留空用 question 当编号
+  id:
+  question: 你最喜欢本站哪个栏目？
+  options: [文章, 留言本, 友情链接]
+  # 预置票数，只在没有后端时使用，可省略
+  votes: []
+
+# 侧栏"最新留言"挂件（需要后端），显示几条
+messages:
+  count: 5
+
+construction:
+  text: 本栏目正在建设中，敬请期待！
+
+# --------------------------------------------------------------
+# 文章
+# --------------------------------------------------------------
+post:
+  # 正文默认字号：12 小 | 14 中 | 16 大。访客可以用文章页的【字号：大 中 小】切换，并会被记住
+  font_size: 12
+  # 段首空两格
+  indent: true
+  # 首页摘要字数（文章里有 <!-- more --> 时以它为准）
+  excerpt_length: 150
+  # 文末版权声明，{author} 换成作者，留空不显示
+  copyright: ※ 本文为 {author} 原创，转载请注明出处 ※
+  # 文末的【打印本页】【返回顶部】【返回上页】
+  toolbar: true
+  # 首页摘要后面显示"[留言(N)]"（需要后端）
+  comment_count: true
+
+# --------------------------------------------------------------
+# 留言
+# --------------------------------------------------------------
+comments:
+  # auto       ：填了 backend.url 就用 backend，否则用 local
+  # backend    ：y2k-server 存留言，所有人可见，带反垃圾和站长审核后台、站长回复
+  # local      ：仿当年的留言本，留言只保存在访客自己的浏览器里，无需后端，但别人看不到
+  # giscus     ：用 GitHub Discussions 存留言，所有人可见（需填下面 giscus 的参数，见 https://giscus.app/zh-CN）
+  # utterances ：用 GitHub Issues 存留言，所有人可见（见 https://utteranc.es/）
+  # none       ：关闭
+  provider: auto
+  # 文章页是否显示留言区（单篇文章可在 front-matter 写 comments: false 关掉）
+  on_posts: true
+  # 普通页面（关于我等）是否显示留言区。留言本页面 type: guestbook 总是显示
+  on_pages: false
+  local:
+    # 预置在留言本页面的留言（演示用，只在 local 模式显示），格式：{ name, face, message, time }
+    guestbook_seed: []
+  # 用后端时每页显示几条留言
+  page_size: 10
+  giscus:
+    repo:
+    repo_id:
+    category:
+    category_id:
+    mapping: pathname
+    theme: light
+    lang: zh-CN
+  utterances:
+    repo:
+    issue_term: pathname
+    theme: github-light
+
+# --------------------------------------------------------------
+# 站内搜索：生成 /search.json 与 /search/ 页面，在浏览器里检索，无需外部服务
+# --------------------------------------------------------------
+search:
+  enable: true
+  # 每篇文章收入索引的正文字数
+  content_length: 3000
+
+# --------------------------------------------------------------
+# 特效（都尊重系统的"减少动态效果"设置；触屏设备不启用鼠标跟随）
+# --------------------------------------------------------------
+effects:
+  # 设为 2000：页头日期显示"今天的月日，但年份是 2000 年"，星期和农历按 2000 年重算
+  era_year: false
+  # 鼠标跟随星星
+  mouse_trail: true
+  # 浏览器标签上的标题文字滚动
+  title_scroll: false
+  # 页面飘雪（黑客黑配色下改为飘落的 0 和 1）
+  snow: false
+  # 打开网站时弹出 Win98 风格欢迎窗口（同一次浏览只弹一次）
+  welcome: false
+  welcome_text: 欢迎光临本站！<br>记得给我留言哦 ^_^
+  # 千年虫彩蛋：页脚的"最后更新"年份用 "19" + getYear() 拼出来，显示成 19100 年这类
+  y2k_bug: false
+  # 彩色滚动条
+  scrollbar: true
+  # 在窗口里斜着弹来弹去的漂浮广告（鼠标移上停住，可关闭）
+  float_ad:
+    enable: false
+    text: 欢迎<br>交换链接
+    link: /links/
+
+# --------------------------------------------------------------
+# 页脚
+# --------------------------------------------------------------
+footer:
+  links:
+    关于本站: /about/
+    留言本: /guestbook/
+    友情链接: /links/
+  best_view: 本站最佳浏览效果：IE 5.0 以上 / 800×600 分辨率 / 小字体
+  # 版权起始年份；最新文章的年份更晚时显示为"起始-最新"，留空则只用最新文章的年份
+  since:
+  # 版权所有者，留空用站点 author
+  owner:
+  statement: 本站内容均为原创，转载请注明出处
+  # 备案号，如 京ICP备00000000号，留空不显示
+  icp:
+  # 显示"本页最后更新于 …"
+  updated: true
+  # 显示"本站由 Hexo 驱动 · 主题 Y2K"
+  powered: true

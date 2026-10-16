@@ -1,0 +1,10 @@
+{
+  "name": "hexo-theme-y2k",
+  "version": "1.0.0",
+  "description": "千禧年（约 2000 年）中文个人主页风格的 Hexo 主题：12px 宋体、表格排版、跑马灯、LED 计数器、88×31 友情链接、留言本",
+  "keywords": ["hexo", "hexo-theme", "theme", "y2k", "retro", "web1.0", "chinese"],
+  "peerDependencies": {
+    "hexo": ">=7.0.0",
+    "hexo-renderer-ejs": ">=2.0.0"
+  }
+}

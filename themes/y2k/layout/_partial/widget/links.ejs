@@ -1,0 +1,16 @@
+<%
+var lw = theme.links_widget || {};
+var all = theme.links || [];
+var btns = all.filter(function (l) { return l.button || l.image; }).slice(0, lw.buttons == null ? 6 : lw.buttons);
+var texts = all.filter(function (l) { return !(l.button || l.image); }).slice(0, lw.texts == null ? 6 : lw.texts);
+%>
+<div class="box w-links"><div class="boxt"><a class="more" href="<%- url_for('links/') %>">更多&gt;&gt;</a>◆ 友情链接</div><div class="boxb" align="center">
+  <% btns.forEach(function (l) { %><%- y2k_button(l) %><% }) %>
+  <% if (texts.length) { %>
+  <div class="w-links-text">
+    <% texts.forEach(function (l) { %>·<a href="<%= y2k_href(l.url) %>"<% if (/^https?:/.test(l.url)) { %> target="_blank" rel="noopener"<% } %>><%= l.name %></a><br><% }) %>
+  </div>
+  <% } %>
+  <div class="muted w-links-mine">欢迎交换链接！<br>本站 LOGO：</div>
+  <%- y2k_button(Object.assign({ name: config.title }, theme.site_button || {}), '/') %>
+</div></div>

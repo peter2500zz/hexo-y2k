@@ -1,0 +1,8 @@
+<%
+var heading = '文章目录';
+if (page.year && page.month) heading = page.year + '年' + parseInt(page.month, 10) + '月 文章目录';
+else if (page.year) heading = page.year + '年 文章目录';
+%>
+<%- partial('_partial/col-open', { cols: 2 }) %>
+<%- partial('_partial/post-table', { heading: heading, total: page.year ? null : site.posts.length, crumb: heading }) %>
+<%- partial('_partial/col-close', { cols: 2 }) %>

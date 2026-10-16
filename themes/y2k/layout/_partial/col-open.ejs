@@ -1,0 +1,13 @@
+<%
+// 打开主体表格：左栏挂件 + 正文单元格。cols = 3 时由 col-close 补上右栏
+var W = parseInt((theme.layout && theme.layout.width) || 760, 10);
+var sb = theme.sidebar || {};
+var L = 180, R = 180, G = 10;
+var M = cols === 3 ? W - L - R - G * 2 : W - L - G;
+var leftWidgets = cols === 3 ? sb.left : (sb.two_column || sb.left);
+%>
+<table class="page body" width="<%= W %>" align="center" cellpadding="0" cellspacing="0" border="0">
+<tr>
+  <td class="col side" width="<%= L %>" valign="top"><%- partial('_partial/sidebar', { widgets: leftWidgets || [] }) %></td>
+  <td class="gap" width="<%= G %>"></td>
+  <td class="col main" width="<%= M %>" valign="top">

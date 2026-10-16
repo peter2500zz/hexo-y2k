@@ -1,0 +1,42 @@
+<%
+var fx = theme.effects || {};
+var ct = theme.counter || {};
+var cm = theme.comments || {};
+var be = y2k_backend();
+var cfg = {
+  root: config.root,
+  scheme: theme.scheme || 'stars',
+  eraYear: fx.era_year ? parseInt(fx.era_year, 10) : null,
+  mouseTrail: fx.mouse_trail !== false,
+  titleScroll: !!fx.title_scroll,
+  snow: !!fx.snow,
+  welcome: !!fx.welcome,
+  y2kBug: !!fx.y2k_bug,
+  counter: { provider: y2k_provider('counter'), base: parseInt(ct.base, 10) || 0, digits: parseInt(ct.digits, 10) || 6 },
+  backend: be ? { url: be, timeout: parseInt(theme.backend.timeout, 10) || 8000 } : null,
+  comments: { provider: y2k_provider('comments'), pageSize: parseInt(cm.page_size, 10) || 10 },
+  pageKey: y2k_key(page),
+  pollId: theme.poll ? String(theme.poll.id || theme.poll.question || '') : '',
+  bgm: { src: theme.bgm && theme.bgm.src ? url_for(theme.bgm.src) : '' },
+  fontSize: parseInt(theme.post && theme.post.font_size, 10) || 12,
+  searchIndex: url_for('search.json'),
+  guestbookSeed: page.type === 'guestbook' && y2k_provider('comments') === 'local' && cm.local && cm.local.guestbook_seed ? cm.local.guestbook_seed : [],
+  poll: theme.poll && theme.poll.votes ? theme.poll.votes : []
+};
+%>
+<% if (fx.welcome) { %>
+<!-- 欢迎窗口：当年是 window.open 弹窗，今天改成页内 Win98 窗口 -->
+<div class="win98 win98-pop" id="y2k-welcome" hidden>
+  <div class="win98-title"><span>欢迎光临</span><button class="btn98 x" type="button" data-y2k="close" aria-label="关闭">×</button></div>
+  <div class="win98-body" align="center"><%- fx.welcome_text %><br><br><button class="btn98" type="button" data-y2k="close">　确定　</button></div>
+</div>
+<% } %>
+<% if (fx.float_ad && fx.float_ad.enable) { %>
+<div id="y2k-float" class="float-ad"><a href="<%= y2k_href(fx.float_ad.link || '#') %>"><%- fx.float_ad.text %></a><span class="x" data-y2k="close-float">关闭</span></div>
+<% } %>
+<script>window.Y2K = <%- y2k_json(cfg) %>;</script>
+<%- js('js/y2k') %>
+<% if (y2k_provider('counter') === 'busuanzi') { %>
+<span hidden><span id="busuanzi_value_site_pv"></span><span id="busuanzi_value_page_pv"></span></span>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<% } %>

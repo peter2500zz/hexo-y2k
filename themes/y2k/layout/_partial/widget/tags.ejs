@@ -1,0 +1,5 @@
+<% if (site.tags.length) { %>
+<div class="box w-tags"><div class="boxt"><a class="more" href="<%- url_for(config.tag_dir + '/') %>">更多&gt;&gt;</a>◆ 文章标签</div><div class="boxb">
+  <% site.tags.sort('name').each(function (t) { %><a href="<%- url_for(t.path) %>" title="<%= t.length %> 篇">[<%= t.name %>]</a> <% }) %>
+</div></div>
+<% } %>

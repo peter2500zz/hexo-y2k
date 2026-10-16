@@ -1,0 +1,20 @@
+<% var links = theme.links || []; var sb = theme.site_button || {}; %>
+<div class="box"><div class="boxt">◆ 友情链接（共 <%= links.length %> 个）</div><div class="boxb">
+  <table class="thin list" width="100%" cellspacing="1" cellpadding="4">
+    <tr class="th"><th width="100">LOGO</th><th width="130">站名</th><th>简介</th></tr>
+    <% links.forEach(function (l) { %>
+    <tr class="hl"><td align="center"><% if (l.button || l.image) { %><%- y2k_button(l) %><% } else { %><span class="muted">（文字链接）</span><% } %></td>
+        <td><a href="<%= y2k_href(l.url) %>"<% if (/^https?:/.test(l.url)) { %> target="_blank" rel="noopener"<% } %>><%= l.name %></a></td>
+        <td><%= l.desc || '' %></td></tr>
+    <% }) %>
+  </table>
+</div></div>
+<div class="box"><div class="boxt">◆ 交换链接</div><div class="boxb">
+  <table width="100%" cellspacing="0" cellpadding="3" border="0">
+    <tr><td width="100" align="center"><%- y2k_button(Object.assign({ name: config.title }, sb), '/') %></td>
+        <td>本站名称：<span class="hi3"><%= config.title %></span><br>本站地址：<span class="en"><%= config.url %></span></td></tr>
+    <tr><td align="right" valign="top">文字链接代码：</td>
+        <td><textarea class="field98 code-copy" rows="2" readonly>&lt;a href="<%= config.url %>" target="_blank"&gt;<%= config.title %>&lt;/a&gt;</textarea></td></tr>
+  </table>
+  <div class="muted">欢迎交换友情链接！请先在贵站加上本站链接，再到<a href="<%- url_for('guestbook/') %>">留言本</a>告诉我 ^_^</div>
+</div></div>

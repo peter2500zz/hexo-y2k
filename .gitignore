@@ -1,0 +1,9 @@
+# 只追踪主题和后端，其余（本地演示站等）不进仓库
+/*
+!/.gitignore
+!/README.md
+!/server/
+!/themes/
+/themes/*
+!/themes/y2k/
+.DS_Store

@@ -1,0 +1,13 @@
+<% var cats = y2k_categories(post); var tags = y2k_tags(post); %>
+<div class="box post-item">
+  <div class="boxt"><span class="r en"><%= post.date.format('YYYY-MM-DD') %></span>◆ <% if (post.sticky) { %><span class="sticky">[置顶]</span> <% } %><a href="<%- url_for(post.path) %>"><%= post.title || '（无题）' %></a><% if (y2k_is_new(post)) { %> <span class="new">NEW!</span><% } %></div>
+  <div class="boxb">
+    <div class="meta muted">
+      发表于 <%= post.date.format('YYYY-MM-DD HH:mm') %>
+      <% if (cats.length) { %>| 栏目：<% cats.forEach(function (c) { %><a href="<%- url_for(c.path) %>">[<%= c.name %>]</a><% }) %><% } %>
+      <% if (tags.length) { %>| 标签：<% tags.forEach(function (t) { %><a href="<%- url_for(t.path) %>"><%= t.name %></a> <% }) %><% } %>
+    </div>
+    <div class="post-body excerpt<%= theme.post && theme.post.indent === false ? '' : ' indent' %>"><%- y2k_excerpt(post) %></div>
+    <div align="right"><a href="<%- url_for(post.path) %><%= post.excerpt ? '#more' : '' %>">[阅读全文&gt;&gt;]</a><% if (theme.post && theme.post.comment_count !== false && y2k_provider('comments') === 'backend' && post.comments !== false) { %> <a href="<%- url_for(post.path) %>#comments" data-y2k-cc="<%= y2k_key(post) %>" hidden>[留言(<span>0</span>)]</a><% } %></div>
+  </div>
+</div>

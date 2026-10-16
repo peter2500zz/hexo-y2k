@@ -1,0 +1,14 @@
+<% var cols = theme.layout && theme.layout.index_columns == 2 ? 2 : 3; var nt = theme.notice || {}; %>
+<%- partial('_partial/col-open', { cols: cols }) %>
+<% if (page.current === 1 && nt.content) { %>
+<div class="box notice"><div class="boxt">◆ <%= nt.title || '站长寄语' %></div><div class="boxb post-body indent">
+  <%- nt.content %>
+  <% if (nt.sign) { %><div align="right" class="muted"><%= nt.sign %></div><% } %>
+</div></div>
+<% } %>
+<% page.posts.each(function (post) { %><%- partial('_partial/post-item', { post: post }) %><% }) %>
+<% if (!page.posts.length) { %>
+<div class="box"><div class="uc"><div class="uc-stripe"></div><div class="uc-text">本站正在建设中，欢迎常来看看~<br><span class="en">UNDER CONSTRUCTION</span></div><div class="uc-stripe"></div></div></div>
+<% } %>
+<%- partial('_partial/pagination', { total: site.posts.length }) %>
+<%- partial('_partial/col-close', { cols: cols }) %>

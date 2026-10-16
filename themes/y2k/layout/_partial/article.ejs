@@ -1,0 +1,37 @@
+<%
+var cats = isPage ? [] : y2k_categories(post);
+var tags = isPage ? [] : y2k_tags(post);
+var pst = theme.post || {};
+var fs = parseInt(pst.font_size, 10) || 12;
+var author = post.author || config.author || '站长';
+%>
+<div class="where">您现在的位置：<a href="<%- url_for('/') %>">首页</a> &gt;
+  <% if (cats.length) { var c = cats[cats.length - 1]; %><a href="<%- url_for(c.path) %>"><%= c.name %></a> &gt; 正文<% } else { %><%= post.title %><% } %>
+</div>
+<div class="box article">
+  <div class="boxt">◆ <%= isPage ? post.title : (cats.length ? cats[cats.length - 1].name : '文章') %></div>
+  <div class="boxb">
+    <h1 class="post-title"><%= post.title %></h1>
+    <div class="post-meta muted" align="center">
+      <% if (!isPage) { %>作者：<%= author %>　发表于：<%= post.date.format('YYYY-MM-DD HH:mm') %>　<% } else if (post.updated) { %>更新于：<%= post.updated.format('YYYY-MM-DD') %>　<% } %>
+      <% if (!isPage && ['busuanzi', 'backend'].indexOf(y2k_provider('counter')) >= 0) { %><span data-y2k-pagepv hidden>阅读：<span class="hi1"></span> 次　</span><% } %>
+      <span class="fs-switch">【字号：<a href="#" data-fs="16">大</a> <a href="#" data-fs="14">中</a> <a href="#" data-fs="12">小</a>】</span>
+    </div>
+    <hr class="dash">
+    <div class="post-body fs<%= fs %><%= pst.indent === false ? '' : ' indent' %>" id="y2k-post-body"><%- post.content %></div>
+    <% if (!isPage) { %>
+    <hr class="dash">
+    <% if (tags.length) { %><div class="post-tags">标签：<% tags.forEach(function (t) { %><a href="<%- url_for(t.path) %>">[<%= t.name %>]</a> <% }) %></div><% } %>
+    <% if (pst.copyright && post.copyright !== false) { %><div class="post-copy hi1" align="center"><%= pst.copyright.replace('{author}', author) %></div><% } %>
+    <% if (post.prev || post.next) { %>
+    <table class="thin prevnext" width="100%" cellspacing="1" cellpadding="3">
+      <tr><td width="50%">上一篇：<% if (post.next) { %><a href="<%- url_for(post.next.path) %>"><%= post.next.title %></a><% } else { %><span class="muted">没有了</span><% } %></td>
+          <td width="50%">下一篇：<% if (post.prev) { %><a href="<%- url_for(post.prev.path) %>"><%= post.prev.title %></a><% } else { %><span class="muted">没有了</span><% } %></td></tr>
+    </table>
+    <% } %>
+    <% if (pst.toolbar !== false) { %>
+    <div class="post-toolbar" align="center"><a href="#" data-y2k="print">【打印本页】</a> <a href="#top">【返回顶部】</a> <a href="#" data-y2k="back">【返回上页】</a></div>
+    <% } %>
+    <% } %>
+  </div>
+</div>

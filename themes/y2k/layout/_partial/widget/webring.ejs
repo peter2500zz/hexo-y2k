@@ -1,0 +1,7 @@
+<% var wr = theme.webring || {}; %>
+<% if (wr.name) { %>
+<div class="box w-webring"><div class="boxt">◆ 网站联盟</div><div class="boxb" align="center">
+  <span class="hi1"><%= wr.name %></span><br>
+  <a href="<%= y2k_href(wr.prev || '#') %>">[上一站]</a> <a href="<%= y2k_href(wr.random || '#') %>">[随机]</a> <a href="<%= y2k_href(wr.next || '#') %>">[下一站]</a>
+</div></div>
+<% } %>

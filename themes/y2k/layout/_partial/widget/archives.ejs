@@ -1,0 +1,8 @@
+<% var months = y2k_month_list(); var lim = (theme.archives && theme.archives.limit) || 12; %>
+<% if (months.length) { %>
+<div class="box w-archives"><div class="boxt"><a class="more" href="<%- url_for(config.archive_dir + '/') %>">更多&gt;&gt;</a>◆ 文章归档</div><div class="boxb">
+  <% months.slice(0, lim).forEach(function (m) { %>
+  <div>· <a href="<%- url_for(config.archive_dir + '/' + m.year + '/' + m.month + '/') %>"><%= m.label %></a> <span class="muted">(<%= m.count %>)</span></div>
+  <% }) %>
+</div></div>
+<% } %>

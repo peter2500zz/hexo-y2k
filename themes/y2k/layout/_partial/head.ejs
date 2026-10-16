@@ -1,0 +1,16 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= y2k_title() %></title>
+<% var desc = page.description || (is_post() ? y2k_strip(page.excerpt || page.content).slice(0, 120) : config.description); %>
+<% if (desc) { %><meta name="description" content="<%= desc %>"><% } %>
+<% var kw = is_post() && page.tags && page.tags.length ? y2k_tags(page).map(function (t) { return t.name; }).join(',') : config.keywords; %>
+<% if (kw) { %><meta name="keywords" content="<%= Array.isArray(kw) ? kw.join(',') : kw %>"><% } %>
+<% if (config.author) { %><meta name="author" content="<%= config.author %>"><% } %>
+<% if (theme.favicon) { %><link rel="icon" href="<%- url_for(theme.favicon) %>"><% } %>
+<% if (config.feed && config.feed.path) { %><%- feed_tag() %><% } %>
+<%- css('css/y2k') %>
+<% if (theme.header && theme.header.wordart_font_css) { %>
+<link rel="stylesheet" href="<%= theme.header.wordart_font_css %>" media="print" onload="this.media='all'">
+<% if (theme.header.wordart_font_family) { %><style>.wordart { font-family: "<%= theme.header.wordart_font_family.replace(/["<>\\]/g, '') %>", "STCaiyun", "华文彩云", "STHupo", "华文琥珀", SimHei, "黑体", "Heiti SC", "PingFang SC", sans-serif; }</style><% } %>
+<% } %>
+<% if (theme.layout && theme.layout.width && theme.layout.width != 760) { %><style>:root { --page-w: <%= parseInt(theme.layout.width, 10) %>px; }</style><% } %>

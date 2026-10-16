@@ -1,0 +1,6 @@
+<% var bg = theme.bgm || {}; %>
+<div class="box w-bgm"><div class="boxt">◆ 背景音乐</div><div class="boxb" align="center">
+  ♪ 正在播放：<span class="hi1"><%= bg.title || '《无题》' %></span><br>
+  <% if (bg.note) { %><span class="muted">（<%= bg.note %>）</span><br><% } %>
+  <button class="btn98" type="button" data-y2k="bgm">播放</button>
+</div></div>

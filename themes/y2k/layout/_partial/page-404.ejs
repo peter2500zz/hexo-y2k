@@ -1,0 +1,29 @@
+<div class="err404">
+  <div class="win98">
+    <div class="win98-title"><span>错误 - <%= config.title %></span><span class="win98-ctl"><b>_</b><b>□</b><b>×</b></span></div>
+    <div class="win98-body">
+      <table cellspacing="0" cellpadding="6" border="0"><tr>
+        <td valign="top">
+          <svg width="32" height="32" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+            <rect x="5" y="0" width="6" height="1" fill="#800000"/><rect x="3" y="1" width="10" height="1" fill="#800000"/>
+            <rect x="2" y="2" width="12" height="1" fill="#C00000"/><rect x="1" y="3" width="14" height="10" fill="#FF0000"/>
+            <rect x="2" y="13" width="12" height="1" fill="#C00000"/><rect x="3" y="14" width="10" height="1" fill="#800000"/><rect x="5" y="15" width="6" height="1" fill="#800000"/>
+            <rect x="0" y="5" width="1" height="6" fill="#C00000"/><rect x="15" y="5" width="1" height="6" fill="#C00000"/>
+            <rect x="4" y="4" width="2" height="2" fill="#FFF"/><rect x="10" y="4" width="2" height="2" fill="#FFF"/>
+            <rect x="6" y="6" width="4" height="4" fill="#FFF"/><rect x="4" y="10" width="2" height="2" fill="#FFF"/><rect x="10" y="10" width="2" height="2" fill="#FFF"/>
+          </svg>
+        </td>
+        <td valign="top" class="err404-text">
+          <b>HTTP 404 - 找不到网页</b><br><br>
+          您要查看的网页可能已被删除、名称已被更改，或者暂时不可用。<br><br>
+          请尝试以下操作：<br>
+          · 如果您是在地址栏中键入的网页地址，请确认拼写正确。<br>
+          · 打开 <a href="<%- url_for('/') %>"><%= config.title %></a> 首页，然后查找与所需信息相关的链接。<br>
+          · 单击 <a href="#" data-y2k="back">后退</a> 按钮尝试其他链接。
+        </td>
+      </tr></table>
+      <div align="center"><a class="btn98" href="<%- url_for('/') %>">返回首页</a> <a class="btn98" href="#" data-y2k="back">后　退</a></div>
+    </div>
+  </div>
+  <% if (page.content) { %><div class="post-body indent err404-extra"><%- page.content %></div><% } %>
+</div>

@@ -1,0 +1,4 @@
+<% var cat = site.categories.findOne({ name: page.category }); %>
+<%- partial('_partial/col-open', { cols: 2 }) %>
+<%- partial('_partial/post-table', { heading: '栏目：' + page.category, total: cat ? cat.length : null, crumb: page.category }) %>
+<%- partial('_partial/col-close', { cols: 2 }) %>

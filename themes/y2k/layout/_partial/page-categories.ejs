@@ -1,0 +1,22 @@
+<% var cats = site.categories.sort('name').filter(function (c) { return !c.parent; }); %>
+<div class="where">您现在的位置：<a href="<%- url_for('/') %>">首页</a> &gt; <%= page.title || '栏目分类' %></div>
+<div class="box"><div class="boxt">◆ <%= page.title || '栏目分类' %>（共 <%= site.categories.length %> 个栏目）</div><div class="boxb">
+  <% if (page.content) { %><div class="post-body indent"><%- page.content %></div><% } %>
+  <table class="thin list" width="100%" cellspacing="1" cellpadding="4">
+    <tr class="th"><th width="36">状态</th><th>栏目</th><th width="44">文章</th><th width="150">最后更新</th></tr>
+    <% cats.forEach(function (c) {
+         var last = c.posts.sort('-date').first();
+         var fresh = last && y2k_is_new(last);
+    %>
+    <tr class="hl">
+      <td align="center" class="<%= fresh ? 'hi1' : 'muted' %>" title="<%= fresh ? '有更新' : '无更新' %>"><%= fresh ? '■' : '□' %></td>
+      <td><a href="<%- url_for(c.path) %>"><b><%= c.name %></b></a>
+        <% var kids = site.categories.filter(function (k) { return k.parent === c._id; }); if (kids.length) { %><br><span class="muted">子栏目：</span><% kids.forEach(function (k) { %><a href="<%- url_for(k.path) %>"><%= k.name %></a> <% }) %><% } %>
+      </td>
+      <td align="center"><%= c.length %></td>
+      <td><% if (last) { %><a href="<%- url_for(last.path) %>"><%= last.title %></a><br><span class="muted en"><%= last.date.format('YYYY-MM-DD HH:mm') %></span><% } %></td>
+    </tr>
+    <% }) %>
+  </table>
+  <div class="muted legend"><span class="hi1">■</span> 有更新　□ 无更新</div>
+</div></div>

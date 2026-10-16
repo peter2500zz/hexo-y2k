@@ -1,0 +1,50 @@
+<%
+var cm = theme.comments || {};
+var provider = y2k_provider('comments');
+var gc = cm.giscus || {}, ut = cm.utterances || {};
+%>
+<% if (provider !== 'none' && provider !== false) { %>
+<div class="box comments" id="comments"><div class="boxt">◆ <%= title %></div><div class="boxb">
+<% if (provider === 'giscus' && gc.repo) { %>
+  <script src="https://giscus.app/client.js"
+    data-repo="<%= gc.repo %>" data-repo-id="<%= gc.repo_id %>"
+    data-category="<%= gc.category %>" data-category-id="<%= gc.category_id %>"
+    data-mapping="<%= key === 'guestbook' ? 'specific' : (gc.mapping || 'pathname') %>"<% if (key === 'guestbook') { %> data-term="guestbook"<% } %>
+    data-strict="0" data-reactions-enabled="0" data-emit-metadata="0" data-input-position="top"
+    data-theme="<%= gc.theme || 'light' %>" data-lang="<%= gc.lang || 'zh-CN' %>" data-loading="lazy"
+    crossorigin="anonymous" async></script>
+<% } else if (provider === 'utterances' && ut.repo) { %>
+  <script src="https://utteranc.es/client.js"
+    repo="<%= ut.repo %>" issue-term="<%= key === 'guestbook' ? 'guestbook' : (ut.issue_term || 'pathname') %>"
+    theme="<%= ut.theme || 'github-light' %>" crossorigin="anonymous" async></script>
+<% } else { var backend = provider === 'backend'; %>
+  <form class="gb-form form0" data-key="<%= key %>"<% if (backend) { %> data-backend<% } %>>
+    <table cellspacing="0" cellpadding="2" border="0" width="100%">
+      <tr><td width="56" nowrap>昵　称：</td><td><input type="text" name="n" size="14" maxlength="16" class="field98"> <span class="hi1">*</span></td></tr>
+      <tr><td nowrap>OICQ：</td><td><input type="text" name="q" size="12" maxlength="12" class="field98" inputmode="numeric"> <span class="muted">（选填）</span></td></tr>
+      <tr><td nowrap>表　情：</td><td>
+        <label><input type="radio" name="f" value="^_^" checked>^_^</label>
+        <label><input type="radio" name="f" value=":-)">:-)</label>
+        <label><input type="radio" name="f" value="^o^">^o^</label>
+        <label><input type="radio" name="f" value="T_T">T_T</label>
+        <label><input type="radio" name="f" value="-_-">-_-</label>
+      </td></tr>
+      <tr><td valign="top" nowrap>内　容：</td><td><textarea name="m" rows="4" maxlength="500" class="field98"></textarea></td></tr>
+      <% if (backend) { %>
+      <tr class="gb-trap" aria-hidden="true"><td>网　址：</td><td><input type="text" name="website" tabindex="-1" autocomplete="off"></td></tr>
+      <tr><td></td><td class="gb-captcha"></td></tr>
+      <% } %>
+      <tr><td></td><td><input type="submit" value="提交留言" class="btn98"> <input type="reset" value="重　写" class="btn98"></td></tr>
+    </table>
+  </form>
+  <% if (backend) { %>
+  <div class="muted gb-note">（请文明留言，不要灌水哦）</div>
+  <div class="gb-list" data-key="<%= key %>" data-backend><div class="muted gb-empty">正在读取留言……</div></div>
+  <div class="gb-more" align="center" hidden><button type="button" class="btn98">更多留言&gt;&gt;</button></div>
+  <% } else { %>
+  <div class="muted gb-note">（本留言本没有服务器，留言只保存在您自己的电脑上，别人看不到哦）</div>
+  <div class="gb-list" data-key="<%= key %>"></div>
+  <% } %>
+<% } %>
+</div></div>
+<% } %>

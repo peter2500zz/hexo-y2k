@@ -1,0 +1,10 @@
+<% var rc = theme.recent || {}; var posts = site.posts.sort('-date').limit(rc.count || 8); %>
+<% if (posts.length) { %>
+<div class="box w-recent"><div class="boxt"><a class="more" href="<%- url_for(config.archive_dir + '/') %>">更多&gt;&gt;</a>◆ 最近更新</div><div class="boxb">
+  <table width="100%" cellspacing="0" cellpadding="1" border="0">
+  <% posts.each(function (p) { %>
+    <tr><td valign="top" width="12">★</td><td><a href="<%- url_for(p.path) %>"><%= p.title %></a><% if (y2k_is_new(p)) { %> <span class="new">NEW!</span><% } %></td><td align="right" valign="top" class="muted en" nowrap><%= p.date.format('MM-DD') %></td></tr>
+  <% }) %>
+  </table>
+</div></div>
+<% } %>

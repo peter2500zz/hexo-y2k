@@ -1,0 +1,12 @@
+<% var tags = site.tags.sort('name').toArray(); var cols = 4; %>
+<div class="where">您现在的位置：<a href="<%- url_for('/') %>">首页</a> &gt; <%= page.title || '文章标签' %></div>
+<div class="box"><div class="boxt">◆ <%= page.title || '文章标签' %>（共 <%= tags.length %> 个）</div><div class="boxb">
+  <% if (page.content) { %><div class="post-body indent"><%- page.content %></div><% } %>
+  <% if (tags.length) { %>
+  <table class="thin" width="100%" cellspacing="1" cellpadding="4">
+    <% for (var i = 0; i < tags.length; i += cols) { %>
+    <tr><% for (var j = i; j < i + cols; j++) { var t = tags[j]; %><td width="25%"><% if (t) { %>· <a href="<%- url_for(t.path) %>"><%= t.name %></a> <span class="muted">(<%= t.length %>)</span><% } %></td><% } %></tr>
+    <% } %>
+  </table>
+  <% } %>
+</div></div>

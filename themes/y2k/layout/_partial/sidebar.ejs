@@ -1,0 +1,7 @@
+<%
+var known = ['profile', 'counter', 'bgm', 'search', 'categories', 'recent', 'archives', 'tags', 'links', 'webring', 'poll', 'construction', 'messages'];
+(widgets || []).forEach(function (w) {
+  if (known.indexOf(w) === -1) return;
+  if (w === 'search' && theme.search && theme.search.enable === false) return;
+  if (w === 'messages' && y2k_provider('comments') !== 'backend') return;
+%><%- partial('_partial/widget/' + w) %><% }); %>

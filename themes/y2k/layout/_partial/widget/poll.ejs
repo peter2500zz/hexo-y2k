@@ -1,0 +1,11 @@
+<% var pl = theme.poll || {}; %>
+<% if (pl.question && pl.options && pl.options.length) { %>
+<div class="box w-poll"><div class="boxt">◆ 小调查</div><div class="boxb">
+  <form class="form0" data-y2k-poll>
+    <%= pl.question %><br>
+    <% pl.options.forEach(function (o, i) { %><label><input type="radio" name="v" value="<%= i %>"> <%= o %></label><br><% }) %>
+    <div align="center"><input type="submit" value="投票" class="btn98"> <input type="button" value="查看" class="btn98" data-y2k="poll-view"></div>
+  </form>
+  <div class="poll-result" hidden></div>
+</div></div>
+<% } %>

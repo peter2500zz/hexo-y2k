@@ -1,0 +1,51 @@
+<%
+var W = parseInt((theme.layout && theme.layout.width) || 760, 10);
+var hd = theme.header || {};
+var bigTitle = hd.title || config.title;
+var subTitle = hd.subtitle || config.subtitle;
+var mq = theme.marquee || {};
+var latest = y2k_latest_post();
+var accents = ['hi3', 'hi1', 'hi2'];
+%>
+<% if (theme.hostad && theme.hostad.enable) { %>
+<!-- 免费空间在页面顶部强制插入的广告条 -->
+<table class="hostad" width="100%" cellpadding="2" cellspacing="0" border="0"><tr>
+  <td align="center"><%= theme.hostad.text %>　<a href="<%= y2k_href(theme.hostad.link || '#') %>"><b><%= theme.hostad.link_text %></b></a></td>
+</tr></table>
+<% } %>
+
+<table class="page" width="<%= W %>" align="center" cellpadding="0" cellspacing="0" border="0">
+  <% if (!theme.topbar || theme.topbar.enable !== false) { %>
+  <tr><td class="topbar">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+      <td class="col">今天是：<span id="y2k-today"><%= date(Date.now(), 'YYYY年M月D日') %></span></td>
+      <td class="col" align="right">
+        <!-- IE5: this.style.behavior='url(#default#homepage)';this.setHomePage(location.href) -->
+        <a href="#" data-y2k="homepage">设为首页</a> |
+        <!-- IE5: window.external.AddFavorite(location.href, document.title) -->
+        <a href="#" data-y2k="favorite">加入收藏</a><% if (theme.topbar && theme.topbar.links) { Object.keys(theme.topbar.links).forEach(function (k) { %> | <a href="<%= y2k_href(theme.topbar.links[k]) %>"><%= k %></a><% }) } %>
+      </td>
+    </tr></table>
+  </td></tr>
+  <% } %>
+  <tr><td align="center" class="masthead">
+    <a href="<%- url_for('/') %>" class="wordart"><%= bigTitle %></a>
+    <% if (subTitle) { %><div class="subtitle"><%= subTitle %></div><% } %>
+  </td></tr>
+  <% if (mq.enable !== false && ((mq.items && mq.items.length) || (mq.latest && latest))) { %>
+  <tr><td class="marquee-row">
+    <marquee scrollamount="<%= mq.speed || 4 %>" onmouseover="this.stop()" onmouseout="this.start()">
+      <% (mq.items || []).forEach(function (item, i) { %><span class="<%= accents[i % 3] %>"><%- item %></span>　　<% }) %>
+      <% if (mq.latest && latest) { %><span class="<%= accents[(mq.items || []).length % 3] %>">本站最近更新：<%= latest.date.format('YYYY年M月D日') %> 新增《<a href="<%- url_for(latest.path) %>"><%= latest.title %></a>》</span><% } %>
+    </marquee>
+  </td></tr>
+  <% } %>
+  <% if (theme.menu) { %>
+  <tr><td align="center" class="nav">
+    <% Object.keys(theme.menu).forEach(function (name) {
+         var link = String(theme.menu[name]);
+         var cur = link === '/' ? is_home() : (link.charAt(0) === '/' && is_current(link));
+    %><a class="navbtn<%= cur ? ' cur' : '' %>" href="<%= y2k_href(link) %>"><%= name %></a><% }) %>
+  </td></tr>
+  <% } %>
+</table>
