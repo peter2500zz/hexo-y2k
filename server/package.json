@@ -1,0 +1,30 @@
+{
+  "name": "y2k-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "hexo-theme-y2k 的后端：留言本、访客计数器、在线人数、小调查，带反垃圾与站长审核后台",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/node.ts",
+    "dev": "node --disable-warning=ExperimentalWarning --watch src/node.ts",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "cf:dev": "wrangler dev",
+    "cf:migrate": "wrangler d1 migrations apply y2k --remote",
+    "cf:deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0",
+    "@hono/node-server": "^2.1.5",
+    "hono": "^4.13.13",
+    "isbot": "^5.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.151.0"
+  }
+}

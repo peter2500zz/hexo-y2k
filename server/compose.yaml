@@ -1,0 +1,13 @@
+services:
+  y2k-server:
+    build: .
+    image: y2k-server
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "127.0.0.1:${Y2K_PORT:-8787}:8787"
+    volumes:
+      - y2k-data:/data
+
+volumes:
+  y2k-data:
